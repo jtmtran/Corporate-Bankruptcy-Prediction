@@ -10,7 +10,7 @@ The dataset used in this project is sourced from Jennie’s GitHub repository. I
 	•	Financial Ratios: Various metrics like liquidity, profitability, leverage, etc.
 	•	Target Variable: Bankruptcy, indicating whether a company has declared bankruptcy (1) or not (0).
 
-Data Source: Company Bankruptcy CSV
+**Data Source**: [Company Bankruptcy CSV](https://github.com/jtmtran/Corporate-Bankruptcy-Prediction/blob/540549b59b7b8a69deef83e9324302c364a5b91c/Company%20Bankruptcy.csv)
 
 🛠️ Tools & Libraries
 
@@ -23,17 +23,17 @@ Data Source: Company Bankruptcy CSV
 🔍 Analysis Process
 
 	1.	Data Import & Cleaning:
-	•	Loaded the dataset from GitHub and handled potential encoding issues.
-	•	Checked for missing values and performed necessary preprocessing.
+ 		Loaded the dataset from GitHub and handled potential encoding issues.
+		Checked for missing values and performed necessary preprocessing.
 	2.	Exploratory Data Analysis (EDA):
-	•	Visualized the distribution of key financial ratios.
-	•	Identified correlations between features and the target variable.
+		Visualized the distribution of key financial ratios.
+		Identified correlations between features and the target variable.
 	3.	Model Building:
-	•	Implemented various models: Logistic Regression, Decision Tree, Random Forest, and XGBoost.
-	•	Evaluated model performance using metrics like accuracy, precision, recall, F1-score, and ROC-AUC.
+		Implemented various models: Logistic Regression, Decision Tree, Random Forest, and XGBoost.
+		Evaluated model performance using metrics like accuracy, precision, recall, F1-score, and ROC-AUC.
 	4.	Results & Recommendations:
-	•	Compared the performance of different models.
-	•	Provided insights on the most significant predictors of bankruptcy.
+		Compared the performance of different models.
+		Provided insights on the most significant predictors of bankruptcy.
 
 📝 Results Summary
 
@@ -43,23 +43,54 @@ Data Source: Company Bankruptcy CSV
 📊 Visualizations
 
 Several visualizations were created to support the analysis:
+
 	•	Correlation heatmap to identify feature relationships.
 	•	ROC curve to compare model performance.
 	•	Feature importance plot from the XGBoost model.
 
- 🚀 How to Reproduce
+ ## 🚀 How to Reproduce
 
-To reproduce the analysis:
-	1.	Clone the repository:
- git clone https://github.com/jtmtran/Corporate-Bankruptcy-Prediction.git
+Follow these steps to get the project running on your machine:
+Prerequisites
 
- 2.	Install the required packages:
-  pip install -r requirements.txt
+	•	Python 3.10 or higher
+	•	Jupyter Notebook or Jupyter Lab installed
+	•	Required packages listed in requirements.txt
 
-  3.	Run the Google Colab notebook:
-GoogleColab notebook Corporate_Bankruptcy_Prediction_final.ipynb
+1. **Clone the Repository**:
+ ```
+   git clone https://github.com/jtmtran/Corporate-Bankruptcy-Prediction.git
+   cd Corporate-Bankruptcy-Prediction
+```
 
-🔍 Example Code & Outputs
+2. **Create a Virtual Environment (Optional but Recommended)**:
+```
+# Create a virtual environment
+python -m venv env
+
+# Activate the virtual environment
+# On Windows:
+env\\Scripts\\activate
+# On macOS/Linux:
+source env/bin/activate
+```
+3. **Install Dependencies:**
+
+```
+pip install -r requirements.txt
+```
+
+4. **Download the Dataset:**
+The dataset is hosted on GitHub and will be automatically fetched when running the notebook. However, you can manually download it if needed:
+[Company Bankruptcy CSV](https://raw.githubusercontent.com/jtmtran/Corporate-Bankruptcy-Prediction/refs/heads/main/Company%20Bankruptcy.csv_)
+
+5. **Run the Notebook:**
+
+Open the Google Colab Notebook and upload the file in sequence:
+[Google Colab Notebook] Corporate_Bankruptcy_Prediction_final.ipynb
+
+
+🔍 **Example Code & Outputs**
 
 1. Data Loading
    
@@ -71,4 +102,4 @@ GoogleColab notebook Corporate_Bankruptcy_Prediction_final.ipynb
 
 📬 Contact
 
-For any questions, please reach out to Jennie Tran via LinkedIn.
+For any questions, please reach out to Jennie Tran via [LinkedIn](www.linkedin.com/in/jennietmtran).
