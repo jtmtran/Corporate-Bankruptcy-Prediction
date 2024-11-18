@@ -93,12 +93,131 @@ Open the Google Colab Notebook and upload the file in sequence:
 🔍 **Example Code & Outputs**
 
 1. Data Loading
+```
+# Load the dataset and handle potential encoding issues
+# Define the URL for the dataset (hosted on GitHub)
+url = 'https://raw.githubusercontent.com/jtmtran/Corporate-Bankruptcy-Prediction/refs/heads/main/Company%20Bankruptcy.csv'
+
+# Fetch the dataset from the URL
+response = requests.get(url)
+
+# Check if the request was successful before loading the dataset
+if response.status_code == 200:
+    # Load the dataset into a DataFrame using the correct encoding
+    df = pd.read_csv(BytesIO(response.content), encoding='ISO-8859-1')
+    print("Dataset successfully loaded.")
+else:
+    print(f"Failed to retrieve the file. Status code: {response.status_code}")
+```
    
-3. Correlation Heatmap
+2. Correlation Heatmap
+```
+# Plot the correlation heatmap to visualize relationships between features
+# Plot the correlation heatmap to visualize feature relationships
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+#Define X_rfe using the selected features from RFE
+X_rfe = df[selected_features]
+
+#Correlation Analysis for selected Features
+corr_matrix_rfe = X_rfe.corr()
+plt.figure(figsize=(12, 10))
+sns.heatmap(corr_matrix_rfe, cmap='coolwarm', annot=True, fmt='.2f')
+plt.title("Correlation Matrix (After RFE)")
+plt.show()
+
+#Identify and Drop Highly Correlated Features (|r| > 0.85)
+high_corr_pairs = [(col1, col2) for col1 in corr_matrix_rfe.columns for col2 in corr_matrix_rfe.columns
+                   if col1 != col2 and abs(corr_matrix_rfe.loc[col1, col2]) > 0.85]
+print("Highly correlated feature pairs:", high_corr_pairs)
+
+#Drop one feature from each highly correlated pair
+features_to_drop = {pair[1] for pair in high_corr_pairs}  # Keep the first feature, drop the second
+print("Features to drop due to high correlation:", features_to_drop)
+
+# Update the DataFrame by dropping highly correlated features
+X_final = X_rfe.drop(columns=list(features_to_drop))
+print("Final set of features after removing highly correlated ones:", X_final.columns.tolist())
+```
    
-4. Model Evaluation
+3. Model Evaluation
+```
+# Initialize and fit the XGBoost classifier
+# Initialize and train the model
+from sklearn.ensemble import RandomForestClassifier
+from xgboost import XGBClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
+
+# List of models to compare
+models = {
+    "Random Forest": RandomForestClassifier(random_state=42),
+    "XGBoost": XGBClassifier(random_state=42, use_label_encoder=False, eval_metric='logloss'),
+    "Logistic Regression": LogisticRegression(random_state=42, max_iter=1000),
+    "Decision Tree": DecisionTreeClassifier(random_state=42),
+    "SVM": SVC(random_state=42, probability=True)
+}
+
+# Dictionary to store the results
+results = []
+
+# Loop through each model, fit it, and evaluate
+for model_name, model in models.items():
+    # Fit the model on the SMOTE-resampled training data
+    model.fit(X_train_smote, y_train_smote)
+
+    # Make predictions on the test data
+    y_pred = model.predict(X_test)
+
+    # Evaluate the model
+    accuracy = accuracy_score(y_test, y_pred)
+    precision = precision_score(y_test, y_pred)
+    recall = recall_score(y_test, y_pred)
+    f1 = f1_score(y_test, y_pred)
+    roc_auc = roc_auc_score(y_test, y_pred)
+
+    # Store the results
+    results.append({
+        "Model": model_name,
+        "Accuracy": accuracy,
+        "Precision": precision,
+        "Recall": recall,
+        "F1 Score": f1,
+        "ROC AUC": roc_auc
+    })
+
+# Convert the results to a DataFrame and display
+import pandas as pd
+results_df = pd.DataFrame(results)
+print(results_df.sort_values(by="F1 Score", ascending=False))
+```
    
-5. Confusion Matrix
+4. Confusion Matrix
+```
+# Plot the correlation heatmap to visualize relationships between features
+# Plot the correlation heatmap to visualize feature relationships
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.metrics import confusion_matrix
+
+# Generate the confusion matrix
+#cm = confusion_matrix(y_test, y_pred_final)
+cm = confusion_matrix(y_test, y_pred_xgb)
+
+
+# Plot the confusion matrix using Seaborn
+plt.figure(figsize=(6, 4))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', cbar=False)
+plt.title("Confusion Matrix for XGBoost Classifier")
+plt.xlabel("Predicted Label")
+plt.ylabel("True Label")
+plt.xticks([0.5, 1.5], ['Non-Bankrupt', 'Bankrupt'], rotation=0)
+plt.yticks([0.5, 1.5], ['Non-Bankrupt', 'Bankrupt'], rotation=0)
+plt.show()
+```
 
 📬 Contact
 
