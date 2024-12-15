@@ -1,10 +1,10 @@
 # Corporate Bankruptcy Prediction
 
-📈 **Project Overview**
+## Project Overview
 
 This project aims to predict corporate bankruptcy using various machine learning models. The dataset consists of financial indicators from multiple companies, and the primary goal is to identify key factors contributing to bankruptcy. This analysis helps in understanding financial health and risk management.
 
-📂 **Dataset**
+## Dataset
 
 The dataset used in this project is sourced from Jennie’s GitHub repository. It contains the following key features:
 	•	Financial Ratios: Various metrics like liquidity, profitability, leverage, etc.
@@ -12,7 +12,7 @@ The dataset used in this project is sourced from Jennie’s GitHub repository. I
 
 **Data Source**: [Company Bankruptcy CSV](https://github.com/jtmtran/Corporate-Bankruptcy-Prediction/blob/540549b59b7b8a69deef83e9324302c364a5b91c/Company%20Bankruptcy.csv)
 
-🛠️ Tools & Libraries
+## Tools & Libraries
 
 	•	Python
 	•	Pandas & NumPy: Data manipulation
@@ -20,7 +20,7 @@ The dataset used in this project is sourced from Jennie’s GitHub repository. I
 	•	Scikit-learn: Machine learning models
 	•	XGBoost: Advanced boosting techniques
 
-🔍 Analysis Process
+## Analysis Process
 
 	1.	Data Import & Cleaning:
  		Loaded the dataset from GitHub and handled potential encoding issues.
@@ -35,12 +35,12 @@ The dataset used in this project is sourced from Jennie’s GitHub repository. I
 		Compared the performance of different models.
 		Provided insights on the most significant predictors of bankruptcy.
 
-📝 Results Summary
+## Results Summary
 
 	•	Best Model: XGBoost achieved the highest accuracy and F1-score.
 	•	Key Predictors: Liquidity ratios and profitability indicators were found to be the most significant features in predicting bankruptcy.
 
-📊 Visualizations
+## Visualizations
 
 Several visualizations were created to support the analysis:
 
@@ -48,7 +48,7 @@ Several visualizations were created to support the analysis:
 	•	ROC curve to compare model performance.
 	•	Feature importance plot from the XGBoost model.
 
- ## 🚀 How to Reproduce
+ ## How to Reproduce
 
 Follow these steps to get the project running on your machine:
 Prerequisites
@@ -90,7 +90,7 @@ Open the Google Colab Notebook and upload the file in sequence:
 [Google Colab Notebook] Corporate_Bankruptcy_Prediction_final.ipynb
 
 
-🔍 **Example Code & Outputs**
+## **Example Code & Outputs**
 
 1. Data Loading
 ```
@@ -140,7 +140,8 @@ print("Features to drop due to high correlation:", features_to_drop)
 X_final = X_rfe.drop(columns=list(features_to_drop))
 print("Final set of features after removing highly correlated ones:", X_final.columns.tolist())
 ```
-   
+![Unknown-7](https://github.com/user-attachments/assets/8cd8967b-4126-4dff-911b-ad4faf85b0de)
+
 3. Model Evaluation
 ```
 # Initialize and fit the XGBoost classifier
@@ -194,7 +195,8 @@ import pandas as pd
 results_df = pd.DataFrame(results)
 print(results_df.sort_values(by="F1 Score", ascending=False))
 ```
-   
+<img width="486" alt="Screenshot 2024-12-15 at 12 27 27 PM" src="https://github.com/user-attachments/assets/96eafd23-b6cb-4ace-81dc-51ea33d42230" />
+
 4. Confusion Matrix
 ```
 # Plot the correlation heatmap to visualize relationships between features
@@ -218,7 +220,17 @@ plt.xticks([0.5, 1.5], ['Non-Bankrupt', 'Bankrupt'], rotation=0)
 plt.yticks([0.5, 1.5], ['Non-Bankrupt', 'Bankrupt'], rotation=0)
 plt.show()
 ```
+![Unknown-8](https://github.com/user-attachments/assets/c44b5c1b-9d34-4438-8ac8-674fb86f70dd)
 
-📬 Contact
+## Key Observations:
+Since main goal for this project is to correctly predict bankruptcy cases, the approach will focus on maximizing recall. Recall measures the proportion of actual bankrupt cases that were correctly identified by the model. In other words, it helps minimize false negatives, which is crucial for a problem like bankruptcy prediction where missing a true positive case (a company that will go bankrupt) can be costly.
 
-For any questions, please reach out to Jennie Tran via [LinkedIn](www.linkedin.com/in/jennietmtran).
+XGBoost:
+It provides a good balance of high F1 Score (0.56) and overall strong performance.
+It has fewer false positives compared to other models while still maintaining a good balance between recall and precision rate.
+
+## Contact
+- **Name**: Jennie Tran
+- **Email**: jennie.tmtran@gmail.com
+- **LinkedIn**: [jennietmtran](www.linkedin.com/in/jennietmtran)
+- **GitHub**: [jtmtran](https://github.com/jtmtran)
