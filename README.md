@@ -8,11 +8,11 @@ This project aims to predict corporate bankruptcy using various machine learning
 
 ## Dataset
 
-The dataset used in this project is sourced from Jennie’s GitHub repository. It contains the following key features:
+The dataset used in this project is sourced from Kaggle which the data were collected from the Taiwan Economic Journal for the years 1999 to 2009. Company bankruptcy was defined based on the business regulations of the Taiwan Stock Exchange. It contains the following key features:
 - Financial Ratios: Various metrics like liquidity, profitability, leverage, etc.
 - Target Variable: Bankruptcy, indicating whether a company has declared bankruptcy (1) or not (0).
 
-**Data Source**: [Company Bankruptcy CSV](https://github.com/jtmtran/Corporate-Bankruptcy-Prediction/blob/540549b59b7b8a69deef83e9324302c364a5b91c/Company%20Bankruptcy.csv)
+**Data Source**: [Corporate Bankruptcy Prediction](https://www.kaggle.com/datasets/fedesoriano/company-bankruptcy-prediction)
 
 ## Tools & Libraries
 - Python
