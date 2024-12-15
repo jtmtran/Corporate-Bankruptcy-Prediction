@@ -2,42 +2,97 @@
 
 ## Project Overview
 
-This project aims to predict corporate bankruptcy using various machine learning models. The dataset consists of financial indicators from multiple companies, and the primary goal is to identify key factors contributing to bankruptcy. This analysis helps in understanding financial health and risk management.
+This project predicts corporate bankruptcy using machine learning models based on financial indicators. The dataset includes various metrics related to company performance, with the goal of identifying factors contributing to bankruptcy. This analysis supports financial risk management and decision-making.
 
 [Notebook](https://github.com/jtmtran/Corporate-Bankruptcy-Prediction/blob/02e556e58a67700372e6dc475a5c1dd6839fb4fd/Corporate_Bankruptcy_Prediction_finalll.ipynb)
 
 ## Dataset
 
-The dataset used in this project is sourced from Kaggle which the data were collected from the Taiwan Economic Journal for the years 1999 to 2009. Company bankruptcy was defined based on the business regulations of the Taiwan Stock Exchange. It contains the following key features:
-- Financial Ratios: Various metrics like liquidity, profitability, leverage, etc.
-- Target Variable: Bankruptcy, indicating whether a company has declared bankruptcy (1) or not (0).
+Dataset
+- Source: Taiwan Economic Journal, covering 1999–2009.
+- Features: Financial ratios representing liquidity, profitability, leverage, and other metrics.
+- Target Variable: Bankrupt?, where 1 indicates bankruptcy and 0 indicates non-bankruptcy.
+- Data Preprocessing:
+  - Column names were cleaned by stripping unnecessary spaces for consistency.
+  - Missing values were not observed in the dataset.
 
 **Data Source**: [Corporate Bankruptcy Prediction](https://www.kaggle.com/datasets/fedesoriano/company-bankruptcy-prediction)
 
 ## Tools & Libraries
-- Python
+- Python: Programming Environment
 - Pandas & NumPy: Data manipulation
 - Matplotlib & Seaborn: Data visualization
-- Scikit-learn: Machine learning models
+- Scikit-learn: Model building and evaluation.
 - XGBoost: Advanced boosting techniques
 
 ## Analysis Process
-1. Data Import & Cleaning:
-- Loaded the dataset from GitHub and handled potential encoding issues.
-- Checked for missing values and performed necessary preprocessing.
-2. Exploratory Data Analysis (EDA):
-- Visualized the distribution of key financial ratios.
-- Identified correlations between features and the target variable.
-3. Model Building:
-- Implemented various models: Logistic Regression, Decision Tree, Random Forest, and XGBoost.
-- Evaluated model performance using metrics like accuracy, precision, recall, F1-score, and ROC-AUC.
-4. Results & Recommendations:
-- Compared the performance of different models.
-- Provided insights on the most significant predictors of bankruptcy.
+### Data Import & Cleaning
+- Dataset loaded directly from an external URL.
+- Handled potential encoding issues during data loading.
+- Cleaned column names to remove whitespace and ensure compatibility.
+
+### Exploratory Data Analysis (EDA)
+- Visualized the distribution of the target variable (Bankrupt?).
+- Examined relationships between selected financial ratios using scatterplots and pairplots.
+- Identified skewness and outliers but preserved original feature values to maintain financial interpretability.
+
+### Feature Engineering
+- Created new features, including:
+- Gross Profit Ratio: Operating Gross Margin / (Operating Profit Rate + 0.01).
+- Adjusted ROA: ROA(C) before interest and depreciation before interest / (1 + Debt ratio %).
+- Leverage Ratio: Total debt / Total net worth.
+- Liquidity Index: Quick Ratio / Current Ratio.
+
+### Model Building
+
+- Implemented multiple machine learning models:
+  - Extra Trees
+  - Decision Tree
+  - Random Forest
+  - XGBoost
+  - Gradient Boosting
+  - Easy Ensemble
+  - CatBoost
+
+- Balanced the dataset using SMOTETomek to address class imbalance in the target variable.
+- Evaluated model performance using metrics such as:
+  - Accuracy
+  - Precision
+  - Recall
+  - F1 Score
+  - ROC-AUC
 
 ## Results Summary
-- Best Model: XGBoost achieved the highest accuracy and F1-score.
-- Key Predictors: Liquidity ratios and profitability indicators were found to be the most significant features in predicting bankruptcy.
+
+- Best Model: XGBoost achieved the best performance, delivering the highest F1-score, which balances precision and recall effectively.
+
+- Metrics for XGBoost:
+  - F1-score: Focused on balancing the accuracy of bankruptcy (precision) and non-bankruptcy predictions (recall).
+  - Accuracy: Provided a general measure of how well the model performed across all cases.
+  - Precision: Ensured the model minimized false positives, reducing unnecessary costs or interventions.
+  - Recall: Avoided missing true bankruptcy cases, albeit not the primary focus.
+
+- Key Insights
+
+1.	Feature Importance:
+   - Liquidity Indicators: Ratios such as Quick Ratio and Current Ratio played a significant role in predicting financial health.
+   - Profitability Metrics: Features like Operating Profit Rate and ROA (Return on Assets) were critical in distinguishing bankrupt from non-bankrupt companies.
+   - Leverage: Excessive debt, as measured by Total debt / Total net worth, was a strong predictor of bankruptcy risk.
+      
+2. Model Selection:
+   - XGBoost excelled due to its ability to handle feature interactions and provide robust predictions on imbalanced datasets.
+   - Random Forest showed competitive performance but did not achieve the same F1-score as XGBoost.
+
+3. Balancing Precision and Recall:
+    - While recall ensures catching bankruptcies, focusing on F1-score aligns better with scenarios where both false positives and false negatives carry significant costs.
+    - The model effectively reduced false positives while maintaining strong recall, achieving a balanced F1-score.
+
+4. Class Imbalance:
+     - Bankruptcy cases were underrepresented in the dataset, necessitating techniques like SMOTETomek for balancing the training data and improving the F1-score.
+
+5. Visualizations:
+    - Feature Importance: Liquidity and profitability ratios emerged as the strongest predictors.
+    - Confusion Matrix: Highlighted how the model managed false positives and false negatives, with an emphasis on achieving balance.
 
 ## Visualizations
 
@@ -46,6 +101,10 @@ Several visualizations were created to support the analysis:
 - ROC curve to compare model performance.
 - Feature importance plot from the XGBoost model.
 
+## Key Observations
+- Focus on F1: The project prioritized recall, as correctly predicting bankrupt companies is critical to mitigating financial risks.
+- Outliers: Outliers were visually inspected but not removed or capped, ensuring the original data’s interpretability.
+- Class Imbalance: Successfully addressed using SMOTETomek to balance training data.
 
 ## Code & Outputs
 1. Data Loading
@@ -177,13 +236,6 @@ plt.yticks([0.5, 1.5], ['Non-Bankrupt', 'Bankrupt'], rotation=0)
 plt.show()
 ```
 ![Unknown-8](https://github.com/user-attachments/assets/c44b5c1b-9d34-4438-8ac8-674fb86f70dd)
-
-## Key Observations:
-Since main goal for this project is to correctly predict bankruptcy cases, the approach will focus on maximizing recall. Recall measures the proportion of actual bankrupt cases that were correctly identified by the model. In other words, it helps minimize false negatives, which is crucial for a problem like bankruptcy prediction where missing a true positive case (a company that will go bankrupt) can be costly.
-
-XGBoost:
-It provides a good balance of high F1 Score (0.56) and overall strong performance.
-It has fewer false positives compared to other models while still maintaining a good balance between recall and precision rate.
 
 ## Contact
 - **Name**: Jennie Tran
