@@ -3,6 +3,7 @@
 ## Project Overview
 
 This project aims to predict corporate bankruptcy using various machine learning models. The dataset consists of financial indicators from multiple companies, and the primary goal is to identify key factors contributing to bankruptcy. This analysis helps in understanding financial health and risk management.
+[Notebook](https://github.com/jtmtran/Corporate-Bankruptcy-Prediction/blob/02e556e58a67700372e6dc475a5c1dd6839fb4fd/Corporate_Bankruptcy_Prediction_finalll.ipynb)
 
 ## Dataset
 
