@@ -74,25 +74,31 @@ Dataset
 
 - Key Insights
 
-1.	Feature Importance:
-   - Liquidity Indicators: Ratios such as Quick Ratio and Current Ratio played a significant role in predicting financial health.
-   - Profitability Metrics: Features like Operating Profit Rate and ROA (Return on Assets) were critical in distinguishing bankrupt from non-bankrupt companies.
-   - Leverage: Excessive debt, as measured by Total debt / Total net worth, was a strong predictor of bankruptcy risk.
-      
-2. Model Selection:
-   - XGBoost excelled due to its ability to handle feature interactions and provide robust predictions on imbalanced datasets.
-   - Random Forest showed competitive performance but did not achieve the same F1-score as XGBoost.
 
-3. Balancing Precision and Recall:
-    - While recall ensures catching bankruptcies, focusing on F1-score aligns better with scenarios where both false positives and false negatives carry significant costs.
-    - The model effectively reduced false positives while maintaining strong recall, achieving a balanced F1-score.
+  1.	Feature Importance:
+         - Liquidity Indicators: Ratios such as Quick Ratio and Current Ratio played a significant role in predicting financial health.
+         - Profitability Metrics: Features like Operating Profit Rate and ROA (Return on Assets) were critical in distinguishing bankrupt from non-bankrupt companies.
+         - Leverage: Excessive debt, as measured by Total debt / Total net worth, was a strong predictor of bankruptcy risk.
 
-4. Class Imbalance:
+
+  2. Model Selection:
+     - XGBoost excelled due to its ability to handle feature interactions and provide robust predictions on imbalanced datasets.
+     - Random Forest showed competitive performance but did not achieve the same F1-score as XGBoost.
+
+
+  3. Balancing Precision and Recall:
+      - While recall ensures catching bankruptcies, focusing on F1-score aligns better with scenarios where both false positives and false negatives carry significant costs.
+      - The model effectively reduced false positives while maintaining strong recall, achieving a balanced F1-score.
+
+
+  4. Class Imbalance:
      - Bankruptcy cases were underrepresented in the dataset, necessitating techniques like SMOTETomek for balancing the training data and improving the F1-score.
 
-5. Visualizations:
-    - Feature Importance: Liquidity and profitability ratios emerged as the strongest predictors.
-    - Confusion Matrix: Highlighted how the model managed false positives and false negatives, with an emphasis on achieving balance.
+
+  5. Visualizations:
+      - Feature Importance: Liquidity and profitability ratios emerged as the strongest predictors.
+      - Confusion Matrix: Highlighted how the model managed false positives and false negatives, with an emphasis on achieving balance.
+
 
 ## Visualizations
 
